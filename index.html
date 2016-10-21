@@ -1,106 +1,120 @@
-<!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="UTF-8">
-    <title>ubuntu设置ipv6 by Fibuge</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-  </head>
-  <body>
-    <section class="page-header">
-      <h1 class="project-name">ubuntu设置ipv6</h1>
-      <h2 class="project-tagline">fibuge</h2>
-      <a href="https://github.com/Fibuge/practice.blog" class="btn">View on GitHub</a>
-      <a href="https://github.com/Fibuge/practice.blog/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/Fibuge/practice.blog/tarball/master" class="btn">Download .tar.gz</a>
-    </section>
+<!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on https://github.com/jonrohan -->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <section class="main-content">
-      <p>参考：主要参考这个博客<a href="http://www.cnblogs.com/makefile/p/5040615.html">http://www.cnblogs.com/makefile/p/5040615.html</a></p>
+  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen">
+  <link rel="stylesheet" href="stylesheets/github-dark.css">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/script.js"></script>
+
+  <title>ubuntu设置ipv6</title>
+  <meta name="description" content="fibuge">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <header>
+      <h1 class="title">ubuntu设置ipv6</h1>
+    </header>
+    <div id="container">
+      <p class="tagline">fibuge</p>
+      <div id="main" role="main">
+        <div class="download-bar">
+        <div class="inner">
+          <a href="https://github.com/Fibuge/practice.blog/tarball/master" class="download-button tar"><span>Download</span></a>
+          <a href="https://github.com/Fibuge/practice.blog/zipball/master" class="download-button zip"><span>Download</span></a>
+          <a href="https://github.com/Fibuge/practice.blog" class="code">View ubuntu设置ipv6 on GitHub</a>
+        </div>
+        <span class="blc"></span><span class="trc"></span>
+        </div>
+        <article class="markdown-body">
+          <p>参考：主要参考这个博客<a href="http://www.cnblogs.com/makefile/p/5040615.html">http://www.cnblogs.com/makefile/p/5040615.html</a></p>
 
 <p><strong>问题描述：</strong>学校支持ipv6协议，在windows上使用pppoe拨号连上校园网后能正常访问ipv6网站（这里以六维空间为例），但是在ubuntu上使用ADSL拨号后不能访问ipv6网站（但是奇怪的是每次重装ubuntu系统后当时可以访问六维空间，过一段时间后（半天或几个小时后）又不能访问六维空间了）。</p>
 
-<p><strong>系统环境：</strong>ubuntu16.04
-<strong>注意：</strong>只验证了以ADSL拨号上网的解决方法，怎么实现ADSL拨号上网网上教程比较多。
-<strong>问题分析：</strong><br>
-~$ ifconfig
-ppp0      Link encap:点对点协议<br>
-          inet 地址:10.170.54.27  点对点:10.170.72.254  掩码:255.255.255.255
-          inet6 地址: fe80::956d:3bb8:a317:3b0b/10 Scope:Link
-          inet6 地址: 2001:250:1006:dff0:956d:3bb8:a317:3b0b/64 Scope:Global
-          inet6 地址: 2001:250:1006:dff0:1900:bda1:842c:718d/64 Scope:Global
-          UP POINTOPOINT RUNNING NOARP MULTICAST  MTU:1492  跃点数:1
-          接收数据包:47068 错误:0 丢弃:0 过载:0 帧数:0
-          发送数据包:72171 错误:0 丢弃:0 过载:0 载波:0
-          碰撞:0 发送队列长度:3 
-          接收字节:23220713 (23.2 MB)  发送字节:68925385 (68.9 MB)
-这里只把ppp0的信息复制了过来。</p>
+<p><strong>系统环境：</strong>ubuntu16.04</p>
+
+<p><strong>注意：</strong>只验证了以ADSL拨号上网的解决方法，怎么实现ADSL拨号上网网上教程比较多。</p>
+
+<p><strong>问题分析：</strong><br>
+~$ ifconfig<br>
+ppp0      Link encap:点对点协议  <br>
+          inet 地址:10.170.54.27  点对点:10.170.72.254  掩码:255.255.255.255<br>
+          inet6 地址: fe80::956d:3bb8:a317:3b0b/10 Scope:Link<br>
+          inet6 地址: 2001:250:1006:dff0:956d:3bb8:a317:3b0b/64 Scope:Global<br>
+          inet6 地址: 2001:250:1006:dff0:1900:bda1:842c:718d/64 Scope:Global<br>
+          UP POINTOPOINT RUNNING NOARP MULTICAST  MTU:1492  跃点数:1<br>
+          接收数据包:47068 错误:0 丢弃:0 过载:0 帧数:0<br>
+          发送数据包:72171 错误:0 丢弃:0 过载:0 载波:0<br>
+          碰撞:0 发送队列长度:3 <br>
+          接收字节:23220713 (23.2 MB)  发送字节:68925385 (68.9 MB)<br>
+这里只把ppp0的信息复制了过来。<br></p>
 
 <p>发现有两个ipv6的Global地址，从网上查到好像是因为ubuntu默认的ipv6使用的是临时地址，那么为什么使用临时地址就会导致不能正常访问ipv6网站呢？我的理解是，一方面，学校给我们动态的分配地址，每次拨号登陆后都会得到一个不一样的新的ipv6地址，而另一方面，ubuntu使用临时地址，这个临时地址不会立刻改变，可能一天或一周后才会改变；这时候ubuntu就不能正确得到学校分配的地址，那么我们也就不能正常使用ipv6上网了。所以这时候只要把ubuntu改为动态改变ipv6地址就行了。</p>
 
 <p><strong>解决过程：</strong>要想实现动态改变ipv6地址，经过验证，只需要改变/etc/sysctl.d/10-ipv6-privacy.conf
-文件，将net.ipv6.conf.default.use_tempaddr改为0。
-~$ sudo gedit /etc/sysctl.d/10-ipv6-privacy.conf </p>
+文件，将net.ipv6.conf.default.use_tempaddr改为0。</p>
 
-<h1>
-<a id="ipv6-privacy-extensions-rfc-4941" class="anchor" href="#ipv6-privacy-extensions-rfc-4941" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>IPv6 Privacy Extensions (RFC 4941)</h1>
+<p>~$ sudo gedit /etc/sysctl.d/10-ipv6-privacy.conf <br></p>
 
-<h1>
-<a id="---" class="anchor" href="#---" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>---</h1>
+<p># IPv6 Privacy Extensions (RFC 4941)<br>
+# ---<br>
+# IPv6 typically uses a device's MAC address when choosing an IPv6 address<br>
+# to use in autoconfiguration. Privacy extensions allow using a randomly<br>
+# generated IPv6 address, which increases privacy.<br>
+#<br>
+# Acceptable values:<br>
+#    0 - don’t use privacy extensions.<br>
+#    1 - generate privacy addresses<br>
+#    2 - prefer privacy addresses and use them over the normal addresses.<br>
+net.ipv6.conf.all.use_tempaddr = 2<br>
+net.ipv6.conf.default.use_tempaddr = 2<br></p>
 
-<h1>
-<a id="ipv6-typically-uses-a-devices-mac-address-when-choosing-an-ipv6-address" class="anchor" href="#ipv6-typically-uses-a-devices-mac-address-when-choosing-an-ipv6-address" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>IPv6 typically uses a device's MAC address when choosing an IPv6 address</h1>
-
-<h1>
-<a id="to-use-in-autoconfiguration-privacy-extensions-allow-using-a-randomly" class="anchor" href="#to-use-in-autoconfiguration-privacy-extensions-allow-using-a-randomly" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>to use in autoconfiguration. Privacy extensions allow using a randomly</h1>
-
-<h1>
-<a id="generated-ipv6-address-which-increases-privacy" class="anchor" href="#generated-ipv6-address-which-increases-privacy" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>generated IPv6 address, which increases privacy.</h1>
-
-<h1>
-<a id="acceptable-values" class="anchor" href="#acceptable-values" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Acceptable values:</h1>
-
-<h1>
-<a id="0---dont-use-privacy-extensions" class="anchor" href="#0---dont-use-privacy-extensions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>0 - don’t use privacy extensions.</h1>
-
-<h1>
-<a id="1---generate-privacy-addresses" class="anchor" href="#1---generate-privacy-addresses" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1 - generate privacy addresses</h1>
-
-<h1>
-<a id="2---prefer-privacy-addresses-and-use-them-over-the-normal-addresses" class="anchor" href="#2---prefer-privacy-addresses-and-use-them-over-the-normal-addresses" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2 - prefer privacy addresses and use them over the normal addresses.</h1>
-
-<p>net.ipv6.conf.all.use_tempaddr = 2
-net.ipv6.conf.default.use_tempaddr = 2</p>
-
-<p>net.ipv6.conf.default.use_tempaddr = 2改为net.ipv6.conf.default.use_tempaddr = 0</p>
+<p>net.ipv6.conf.default.use_tempaddr = 2改为net.ipv6.conf.default.use_tempaddr = 0<br></p>
 
 <p>~$ sudo sysctl --system #加载所有的配置文件，像/etc/sysctl.d/*等
 然后重新拨号连接校园网(一定要重新拨号)，这时候会发现已经可以访问六维空间了。</p>
 
-<p>这时候查看网络信息：
-~$ ifconfig
-ppp0      Link encap:点对点协议<br>
-          inet 地址:10.170.12.59  点对点:10.170.72.254  掩码:255.255.255.255
-          inet6 地址: fe80::a923:8a75:4dc9:ead1/10 Scope:Link
-          inet6 地址: 2001:250:1006:dff0:a923:8a75:4dc9:ead1/64 Scope:Global
-          UP POINTOPOINT RUNNING NOARP MULTICAST  MTU:1492  跃点数:1
-          接收数据包:2396 错误:0 丢弃:0 过载:0 帧数:0
-          发送数据包:2362 错误:0 丢弃:0 过载:0 载波:0
-          碰撞:0 发送队列长度:3 
-          接收字节:2164847 (2.1 MB)  发送字节:326909 (326.9 KB)
+<p>这时候查看网络信息：<br>
+~$ ifconfig<br>
+ppp0      Link encap:点对点协议  <br>
+          inet 地址:10.170.12.59  点对点:10.170.72.254  掩码:255.255.255.255<br>
+          inet6 地址: fe80::a923:8a75:4dc9:ead1/10 Scope:Link<br>
+          inet6 地址: 2001:250:1006:dff0:a923:8a75:4dc9:ead1/64 Scope:Global<br>
+          UP POINTOPOINT RUNNING NOARP MULTICAST  MTU:1492  跃点数:1<br>
+          接收数据包:2396 错误:0 丢弃:0 过载:0 帧数:0<br>
+          发送数据包:2362 错误:0 丢弃:0 过载:0 载波:0<br>
+          碰撞:0 发送队列长度:3 <br>
+          接收字节:2164847 (2.1 MB)  发送字节:326909 (326.9 KB)<br>
 这时候会发现只有一个Global地址，设置完成。</p>
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="owner">
+      <p><a href="https://github.com/Fibuge" class="avatar"><img src="https://avatars1.githubusercontent.com/u/21051321?v=3&amp;s=60" width="48" height="48"></a> <a href="https://github.com/Fibuge">Fibuge</a> maintains <a href="https://github.com/Fibuge/practice.blog">ubuntu设置ipv6</a></p>
 
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/Fibuge/practice.blog">ubuntu设置ipv6</a> is maintained by <a href="https://github.com/Fibuge">Fibuge</a>.</span>
 
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>
-
-    </section>
+      </div>
+      <div class="creds">
+        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br>theme by <a href="https://twitter.com/jonrohan/">Jon Rohan</a></small>
+      </div>
+    </footer>
+  </div>
+  <div class="current-section">
+    <a href="#top">Scroll to top</a>
+    <a href="https://github.com/Fibuge/practice.blog/tarball/master" class="tar">tar</a><a href="https://github.com/Fibuge/practice.blog/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
+    <p class="name"></p>
+  </div>
 
   
-  </body>
+</body>
 </html>
