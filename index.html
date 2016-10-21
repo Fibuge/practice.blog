@@ -19,8 +19,79 @@
     </section>
 
     <section class="main-content">
-      <h1>
-<a id="问题描述学校支持ipv6协议在windows上使用pppoe拨号连上校园网后能正常访问ipv6网站这里以六维空间为例但是在ubuntu上使用adsl拨号后不能访问ipv6网站但是奇怪的是每次重装ubuntu系统后当时可以访问六维空间过一段时间后半天或几个小时后又不能访问六维空间了" class="anchor" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0%E5%AD%A6%E6%A0%A1%E6%94%AF%E6%8C%81ipv6%E5%8D%8F%E8%AE%AE%E5%9C%A8windows%E4%B8%8A%E4%BD%BF%E7%94%A8pppoe%E6%8B%A8%E5%8F%B7%E8%BF%9E%E4%B8%8A%E6%A0%A1%E5%9B%AD%E7%BD%91%E5%90%8E%E8%83%BD%E6%AD%A3%E5%B8%B8%E8%AE%BF%E9%97%AEipv6%E7%BD%91%E7%AB%99%E8%BF%99%E9%87%8C%E4%BB%A5%E5%85%AD%E7%BB%B4%E7%A9%BA%E9%97%B4%E4%B8%BA%E4%BE%8B%E4%BD%86%E6%98%AF%E5%9C%A8ubuntu%E4%B8%8A%E4%BD%BF%E7%94%A8adsl%E6%8B%A8%E5%8F%B7%E5%90%8E%E4%B8%8D%E8%83%BD%E8%AE%BF%E9%97%AEipv6%E7%BD%91%E7%AB%99%E4%BD%86%E6%98%AF%E5%A5%87%E6%80%AA%E7%9A%84%E6%98%AF%E6%AF%8F%E6%AC%A1%E9%87%8D%E8%A3%85ubuntu%E7%B3%BB%E7%BB%9F%E5%90%8E%E5%BD%93%E6%97%B6%E5%8F%AF%E4%BB%A5%E8%AE%BF%E9%97%AE%E5%85%AD%E7%BB%B4%E7%A9%BA%E9%97%B4%E8%BF%87%E4%B8%80%E6%AE%B5%E6%97%B6%E9%97%B4%E5%90%8E%E5%8D%8A%E5%A4%A9%E6%88%96%E5%87%A0%E4%B8%AA%E5%B0%8F%E6%97%B6%E5%90%8E%E5%8F%88%E4%B8%8D%E8%83%BD%E8%AE%BF%E9%97%AE%E5%85%AD%E7%BB%B4%E7%A9%BA%E9%97%B4%E4%BA%86" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>问题描述：学校支持ipv6协议，在windows上使用pppoe拨号连上校园网后能正常访问ipv6网站（这里以六维空间为例），但是在ubuntu上使用ADSL拨号后不能访问ipv6网站（但是奇怪的是每次重装ubuntu系统后当时可以访问六维空间，过一段时间后（半天或几个小时后）又不能访问六维空间了）。</h1>
+      <p>参考：主要参考这个博客<a href="http://www.cnblogs.com/makefile/p/5040615.html">http://www.cnblogs.com/makefile/p/5040615.html</a></p>
+
+<p><strong>问题描述：</strong>学校支持ipv6协议，在windows上使用pppoe拨号连上校园网后能正常访问ipv6网站（这里以六维空间为例），但是在ubuntu上使用ADSL拨号后不能访问ipv6网站（但是奇怪的是每次重装ubuntu系统后当时可以访问六维空间，过一段时间后（半天或几个小时后）又不能访问六维空间了）。</p>
+
+<p><strong>系统环境：</strong>ubuntu16.04
+<strong>注意：</strong>只验证了以ADSL拨号上网的解决方法，怎么实现ADSL拨号上网网上教程比较多。
+<strong>问题分析：</strong><br>
+~$ ifconfig
+ppp0      Link encap:点对点协议<br>
+          inet 地址:10.170.54.27  点对点:10.170.72.254  掩码:255.255.255.255
+          inet6 地址: fe80::956d:3bb8:a317:3b0b/10 Scope:Link
+          inet6 地址: 2001:250:1006:dff0:956d:3bb8:a317:3b0b/64 Scope:Global
+          inet6 地址: 2001:250:1006:dff0:1900:bda1:842c:718d/64 Scope:Global
+          UP POINTOPOINT RUNNING NOARP MULTICAST  MTU:1492  跃点数:1
+          接收数据包:47068 错误:0 丢弃:0 过载:0 帧数:0
+          发送数据包:72171 错误:0 丢弃:0 过载:0 载波:0
+          碰撞:0 发送队列长度:3 
+          接收字节:23220713 (23.2 MB)  发送字节:68925385 (68.9 MB)
+这里只把ppp0的信息复制了过来。</p>
+
+<p>发现有两个ipv6的Global地址，从网上查到好像是因为ubuntu默认的ipv6使用的是临时地址，那么为什么使用临时地址就会导致不能正常访问ipv6网站呢？我的理解是，一方面，学校给我们动态的分配地址，每次拨号登陆后都会得到一个不一样的新的ipv6地址，而另一方面，ubuntu使用临时地址，这个临时地址不会立刻改变，可能一天或一周后才会改变；这时候ubuntu就不能正确得到学校分配的地址，那么我们也就不能正常使用ipv6上网了。所以这时候只要把ubuntu改为动态改变ipv6地址就行了。</p>
+
+<p><strong>解决过程：</strong>要想实现动态改变ipv6地址，经过验证，只需要改变/etc/sysctl.d/10-ipv6-privacy.conf
+文件，将net.ipv6.conf.default.use_tempaddr改为0。
+~$ sudo gedit /etc/sysctl.d/10-ipv6-privacy.conf </p>
+
+<h1>
+<a id="ipv6-privacy-extensions-rfc-4941" class="anchor" href="#ipv6-privacy-extensions-rfc-4941" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>IPv6 Privacy Extensions (RFC 4941)</h1>
+
+<h1>
+<a id="---" class="anchor" href="#---" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>---</h1>
+
+<h1>
+<a id="ipv6-typically-uses-a-devices-mac-address-when-choosing-an-ipv6-address" class="anchor" href="#ipv6-typically-uses-a-devices-mac-address-when-choosing-an-ipv6-address" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>IPv6 typically uses a device's MAC address when choosing an IPv6 address</h1>
+
+<h1>
+<a id="to-use-in-autoconfiguration-privacy-extensions-allow-using-a-randomly" class="anchor" href="#to-use-in-autoconfiguration-privacy-extensions-allow-using-a-randomly" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>to use in autoconfiguration. Privacy extensions allow using a randomly</h1>
+
+<h1>
+<a id="generated-ipv6-address-which-increases-privacy" class="anchor" href="#generated-ipv6-address-which-increases-privacy" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>generated IPv6 address, which increases privacy.</h1>
+
+<h1>
+<a id="acceptable-values" class="anchor" href="#acceptable-values" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Acceptable values:</h1>
+
+<h1>
+<a id="0---dont-use-privacy-extensions" class="anchor" href="#0---dont-use-privacy-extensions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>0 - don’t use privacy extensions.</h1>
+
+<h1>
+<a id="1---generate-privacy-addresses" class="anchor" href="#1---generate-privacy-addresses" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1 - generate privacy addresses</h1>
+
+<h1>
+<a id="2---prefer-privacy-addresses-and-use-them-over-the-normal-addresses" class="anchor" href="#2---prefer-privacy-addresses-and-use-them-over-the-normal-addresses" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2 - prefer privacy addresses and use them over the normal addresses.</h1>
+
+<p>net.ipv6.conf.all.use_tempaddr = 2
+net.ipv6.conf.default.use_tempaddr = 2</p>
+
+<p>net.ipv6.conf.default.use_tempaddr = 2改为net.ipv6.conf.default.use_tempaddr = 0</p>
+
+<p>~$ sudo sysctl --system #加载所有的配置文件，像/etc/sysctl.d/*等
+然后重新拨号连接校园网(一定要重新拨号)，这时候会发现已经可以访问六维空间了。</p>
+
+<p>这时候查看网络信息：
+~$ ifconfig
+ppp0      Link encap:点对点协议<br>
+          inet 地址:10.170.12.59  点对点:10.170.72.254  掩码:255.255.255.255
+          inet6 地址: fe80::a923:8a75:4dc9:ead1/10 Scope:Link
+          inet6 地址: 2001:250:1006:dff0:a923:8a75:4dc9:ead1/64 Scope:Global
+          UP POINTOPOINT RUNNING NOARP MULTICAST  MTU:1492  跃点数:1
+          接收数据包:2396 错误:0 丢弃:0 过载:0 帧数:0
+          发送数据包:2362 错误:0 丢弃:0 过载:0 载波:0
+          碰撞:0 发送队列长度:3 
+          接收字节:2164847 (2.1 MB)  发送字节:326909 (326.9 KB)
+这时候会发现只有一个Global地址，设置完成。</p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/Fibuge/practice.blog">ubuntu设置ipv6</a> is maintained by <a href="https://github.com/Fibuge">Fibuge</a>.</span>
